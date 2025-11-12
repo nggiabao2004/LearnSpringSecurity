@@ -9,15 +9,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserPrincipal implements UserDetails {
     private User user;
+
+    public UserPrincipal(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(
                 new SimpleGrantedAuthority(user.getRole())
+        // Trong trường hợp không có phần quyền (ROLE) thì nên để mặc định là "USER"
+        // return Collections.singleton(new SimpleGrantedAuthority("USER"));
         );
     }
 

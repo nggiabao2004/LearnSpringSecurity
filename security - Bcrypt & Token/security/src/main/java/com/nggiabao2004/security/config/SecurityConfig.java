@@ -42,16 +42,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .csrf(customizer -> customizer.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(request -> request
-                    .requestMatchers("register", "login").permitAll()
+                    .requestMatchers("/register", "/login").permitAll()
                     .requestMatchers("/public/**").permitAll() // Cho phép truy cập tất cả
                     .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // Chỉ cho phép USER và ADMIN
                     .requestMatchers("/admin/**").hasRole("ADMIN") // Chỉ cho phép ADMIN
                     .anyRequest().authenticated())
-            .formLogin(Customizer.withDefaults())
-            .httpBasic(Customizer.withDefaults())
+                //.formLogin(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(Customizer.withDefaults())
             .build()
         ;
     }
