@@ -5,7 +5,7 @@
 Project Spring Security được xây dựng và phát triển bằng:
 
 - **Ngôn ngữ lập trình** - Java (version 21)
-- **Framework** - Spring Framework
+- **Framework** - Spring Framework v3.5.7
 - **Công cụ quản lý dự án** - Maven
 - **Cơ sở dữ liệu** - Phần mềm XAMPP (có thể thay thế cho MySQL)
 - **IDE soạn code** - Phần mềm Intellij IDEA Ultimate (có thể sử dụng Visual Studio Code, hay là IntelliJ IDEA Community Edition)
